@@ -70,5 +70,28 @@ public class StudentController {
     //update Student
 
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Student> updateStudentDetail(@PathVariable Long id,@RequestBody Student studentReq){
+        Student updateStudent= studentService.updateStudent(id,studentReq);
+
+        if (updateStudent==null){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        return ResponseEntity.ok(updateStudent);
+    }
+
+
     //delete Student
+    @DeleteMapping("/delete/{id}")
+    public  ResponseEntity<Student> deleteStudent(@PathVariable Long id){
+         Student deletedStudent = studentService.deleteStudent(id);
+
+         if (deletedStudent == null) {
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+         }
+
+         return ResponseEntity.ok(deletedStudent);
+
+    }
 }

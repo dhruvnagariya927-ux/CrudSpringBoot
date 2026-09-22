@@ -57,4 +57,36 @@ public  class StudentService {
     }
 
 
+    //update student detail
+
+    public  Student updateStudent(Long id,Student studentReq){
+     Optional   <Student> existingStudent= studentRepository.findById(id);
+
+     if (existingStudent.isEmpty()){
+         return null;
+     }
+
+     Student studentToSave= existingStudent.get();
+
+    studentToSave.setAge(studentReq.getAge());
+    studentToSave.setName(studentReq.getName());
+    studentToSave.setRollno(studentReq.getRollno());
+    studentToSave.setSubject(studentReq.getSubject());
+
+    return studentRepository.save(studentToSave);
+
+    }
+
+    public Student deleteStudent(Long id) {
+        Optional<Student> existingStudent = studentRepository.findById(id);
+
+        if (existingStudent.isEmpty()) {
+            return null;
+        }
+
+        Student studentToDelete = existingStudent.get();
+        studentRepository.delete(studentToDelete);
+        return studentToDelete;
+    }
+
 }
