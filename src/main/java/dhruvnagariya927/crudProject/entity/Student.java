@@ -9,6 +9,14 @@ public class Student {
     @Id
     long id;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     private String name;
     private int rollno;
    private int age;
